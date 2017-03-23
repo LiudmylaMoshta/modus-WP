@@ -49,7 +49,8 @@ html {
     background-color: #e2534b;
     border-radius: 5px;
     padding: 5px;
-    margin-top: 8px; }
+    margin-top: 8px;
+    z-index: 10; }
     .nav-modus .li-menu > ul:before {
       content: '';
       border-left: 8px solid transparent;
@@ -96,10 +97,52 @@ html {
     color: #ffffff;
     text-decoration: none;
     border-radius: 5px; }
-    .prev-button a:hover {
-      background-color: #e8645a; }
-      .prev-button a:hover i {
-        background-color: #e8645a; }
+
+.section-sliders .carousel-control {
+  width: auto;
+  background-color: transparent;
+  background-image: none; }
+  .section-sliders .carousel-control:hover {
+    background-color: transparent;
+    background-image: none; }
+  .section-sliders .carousel-control .fa-angle-double-right {
+    width: 30px;
+    height: 30px;
+    margin-top: -10px;
+    font-size: 30px;
+    right: 0;
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    display: inline-block; }
+  .section-sliders .carousel-control .fa-angle-double-left {
+    width: 30px;
+    height: 30px;
+    margin-top: -10px;
+    font-size: 30px;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    display: inline-block; }
+.section-sliders .content-slider {
+  bottom: 145px; }
+  .section-sliders .content-slider .title-slider-top {
+    width: auto;
+    display: inline-block;
+    color: #ffffff;
+    font: 700 3.125rem/3.75rem "Open Sans";
+    text-transform: uppercase;
+    border-radius: 5px;
+    background-color: #e2534b; }
+  .section-sliders .content-slider p {
+    display: inline-block;
+    width: 470px;
+    color: #ffffff;
+    font: 400 1rem/1.625rem "Open Sans";
+    border-radius: 5px;
+    background-color: #000000;
+    opacity: 0.5; }
 
 .section-services {
   background-color: #f3f3f3;
@@ -130,6 +173,10 @@ html {
     list-style-type: none;
     text-align: center;
     padding-left: 0; }
+    .section-services .list-services .li-services:hover .prev-button a {
+      background-color: #e8645a; }
+    .section-services .list-services .li-services:hover .content-services .fa {
+      color: #e8645a; }
     .section-services .list-services .li-services .content-services {
       margin-top: 50px;
       height: 17.3rem;
@@ -169,7 +216,16 @@ html {
   .section-progress-bar .text-border {
     background-color: #ffffff;
     padding: 15px;
-    border-radius: 10px; }
+    border-radius: 10px;
+    display: block; }
+    .section-progress-bar .text-border:after {
+      content: '';
+      border: 10px solid transparent;
+      border-right-color: #FFFFFF;
+      border-top-color: #FFFFFF;
+      position: absolute;
+      bottom: 20px;
+      left: 25%; }
 
 .section-client {
   background-color: #f3f3f3;
@@ -251,13 +307,13 @@ footer {
     font-style: italic; }
   footer span {
     color: #ffffff; }
-  footer .nav-footer-modus {
+  footer .menu {
     list-style-type: none;
     padding-left: 25px; }
-    footer .nav-footer-modus li a {
+    footer .menu li a {
       color: #ffffff;
       text-decoration: none; }
-      footer .nav-footer-modus li a:before {
+      footer .menu li a:before {
         content: '\203a';
         color: #ffffff;
         margin-right: 5px; }

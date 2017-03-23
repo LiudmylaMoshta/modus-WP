@@ -24,7 +24,6 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="brand-modus" >
-<!--                    <a href="--><?php //echo home_url();?><!--">MODUS <span class="logo-small">versus</span></a>-->
                     <a href="<?php echo home_url();?>"><?php echo get_theme_mod('logo'); ?></a>
                 </div>
 
