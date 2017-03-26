@@ -1,0 +1,49 @@
+@media (min-width: 768px) {
+  html {
+    font-size: 14px; }
+
+  .nav-modus .li-menu a {
+    padding: 15px 8px; }
+
+  .section-sliders .content-slider .title-slider-top {
+    margin: 10px auto;
+    width: 350px;
+    display: block;
+    margin-top: 50px; }
+
+  footer .title-footer {
+    margin-top: 10px;
+    margin-bottom: 25px; }
+  footer .end-footer .social-media-icons {
+    padding-top: 0; }
+    footer .end-footer .social-media-icons li {
+      padding-right: 26px; } }
+@media (min-width: 992px) {
+  html {
+    font-size: 15px; }
+
+  .modus-search .input-group:focus input[type="text"], .modus-search .input-group:hover input[type="text"] {
+    width: 200px; }
+
+  .section-services .prev-services .btn-top-widget {
+    margin-top: -23px; }
+
+  .section-progress-bar {
+    padding-top: 154px; }
+
+  .section-img {
+    min-height: 280px; }
+
+  .list-img {
+    position: absolute; } }
+@media (min-width: 1200px) {
+  html {
+    font-size: 16px; }
+
+  .section-sliders .content-slider .title-slider-top {
+    margin-top: 120px; } }
+@media (min-width: 1500px) {
+  html {
+    font-size: 16px; } }
+
+/*# sourceMappingURL=media-style.css.map */
