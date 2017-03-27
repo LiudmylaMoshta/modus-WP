@@ -19,6 +19,18 @@
             }
         }
     }
+    .section-progress-bar{
+        .text-border{
+            &:after{
+                bottom: 20%;
+                left: 5%;
+            }
+        }
+        .title-modus{
+            margin-top: 0;
+
+        }
+    }
     footer{
         .title-footer{
             margin-top: 10px;
@@ -60,6 +72,12 @@
 
     .section-progress-bar{
         padding-top: 154px;
+        .text-border{
+            &:after{
+                bottom: 29%;
+                left: 15%;
+            }
+        }
         }
     .section-img{
         min-height: 280px;
@@ -67,6 +85,7 @@
     .list-img{
         position: absolute;
     }
+
 }
 
 

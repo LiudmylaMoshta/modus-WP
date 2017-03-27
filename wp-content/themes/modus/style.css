@@ -223,13 +223,23 @@ html {
 
 .title-modus {
   color: #7f8c8c;
-  font: 700 1rem/1.1875rem "Open Sans"; }
+  font: 700 1rem/1.1875rem "Open Sans";
+  margin-top: 15px; }
 
 .section-progress-bar {
+  padding-top: 14px;
   background-color: #f3f3f3; }
+  .section-progress-bar .content-progressbar {
+    min-height: 180px; }
+  .section-progress-bar .name-author {
+    color: #777777;
+    font: 600 1rem/1.875rem "Open Sans";
+    margin-left: 43px; }
   .section-progress-bar .list-choose {
     list-style-type: none;
     padding-left: 0; }
+    .section-progress-bar .list-choose li {
+      color: #777777; }
     .section-progress-bar .list-choose li:before {
       content: '\2192';
       color: #ff0000;
@@ -249,7 +259,7 @@ html {
       border-right-color: #FFFFFF;
       border-top-color: #FFFFFF;
       position: absolute;
-      bottom: 20px;
+      bottom: 6%;
       left: 25%; }
 
 .section-img {

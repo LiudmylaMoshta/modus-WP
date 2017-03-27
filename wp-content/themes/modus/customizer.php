@@ -147,17 +147,13 @@ function wptutsplus_customize_colors() {
             background-color: <?php echo $header_bg_color; ?>;
         }
 
-        .navbar-default .navbar-nav>li>a {
-            color: #ffffff;
-        }
-
         footer {
             background-color: <?php echo $footer_bg_color ?>;
         }
 
     </style>
 
-<!--    --><?php
+    <?php
 }
 add_action( 'wp_head', 'wptutsplus_customize_colors' );
 

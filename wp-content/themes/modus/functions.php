@@ -4,7 +4,7 @@
 function modus() {
     wp_enqueue_style('style', get_template_directory_uri().'/style.css');
     wp_enqueue_style('media-style', get_template_directory_uri().'/media-style.css');
-
+    wp_enqueue_script('progress-js', get_template_directory_uri().'/js/progressbar.js');
 }
 add_action('wp_enqueue_scripts', 'modus');
 
@@ -318,134 +318,85 @@ add_action( 'customize_register', 'my_add_customizer_sections' );
 //-----------------------------------------------------END SOCIAL ICON-----------------------------------------------------
 
 //------------------------------------------META-BOX-----------------------------------------------------------------------
-$prefix = 'dbt_';
+add_action('add_meta_boxes', 'my_extra_fields', 1);
 
-$meta_box = array(
-    'id' => 'my-meta-box',
-    'title' => 'Section Progress Bars(Modus Vernus)',
-    'page' => 'page',
-    'context' => 'normal',
-    'priority' => 'high',
-    'fields' => array(
-        array(
-            'name' => 'Title',
-            'desc' => 'Enter something here',
-            'id' => $prefix . 'text',
-            'type' => 'text',
-            'std' => 'Default value 1'
-        ),
-        array(
-            'name' => 'Text',
-            'desc' => 'Enter big text here',
-            'id' => $prefix . 'textarea',
-            'type' => 'textarea',
-            'std' => 'Default value 2'
-        ),
-        array(
-            'name' => 'Text',
-            'desc' => 'Enter big text here',
-            'id' => $prefix . 'textarea',
-            'type' => 'textarea',
-            'std' => 'Default value 3'
-        ),
-    )
-);
+function my_extra_fields() {
+    add_meta_box( 'extra_fields', 'Section ProgressBar', 'extra_fields_box_func', 'page', 'normal', 'high'  );
+}
+function extra_fields_box_func( $post ){
+    ?>
+    <h3><label><input type="text" name="extra[title-progress-bar]" value="<?php echo get_post_meta($post->ID, 'title-progress-bar', 1); ?>" style="width:50%" /> ? заголовок страницы (title)</label></h3>
+
+    <ul>Описание статьи (description):
+        <textarea type="text" name="extra[description]" style="width:100%;height:150px;"><?php echo get_post_meta($post->ID, 'description', 1); ?></textarea>
+    </ul>
+    <p>Описание статьи (text):
+        <textarea type="text" name="extra[text-progress-bar]" style="width:100%;height:50px;"><?php echo get_post_meta($post->ID, 'text-progress-bar', 1); ?></textarea>
+    </p>
+
+    <h3><label><input type="text" name="extra[title-testimonials]" value="<?php echo get_post_meta($post->ID, 'title-testimonials', 1); ?>" style="width:50%" /> ? заголовок(title-testimonials)</label></h3>
+
+    <p>Описание статьи (Testimonials):
+        <textarea type="text" name="extra[testimonials]" style="width:100%;height:50px;"><?php echo get_post_meta($post->ID, 'testimonials', 1); ?></textarea>
+    </p>
+    <span>Описание статьи (Author):
+        <textarea type="text" name="extra[author]" style="width:100%;height:50px;"><?php echo get_post_meta($post->ID, 'author', 1); ?></textarea>
+    </span>
 
 
-add_action('admin_menu', 'mytheme_add_box');
+    <p>Видимость поста: <?php $mark_v = get_post_meta($post->ID, 'robotmeta', 1); ?>
+        <label><input type="radio" name="extra[robotmeta]" value="" <?php checked( $mark_v, '' ); ?> /> index</label>
+        <label><input type="radio" name="extra[robotmeta]" value="nofollow" <?php checked( $mark_v, 'nofollow' ); ?> /> nofollow</label>
+        <label><input type="radio" name="extra[robotmeta]" value="noindex" <?php checked( $mark_v, 'noindex' ); ?> /> noindex</label>
+        <label><input type="radio" name="extra[robotmeta]" value="noindex,nofollow" <?php checked( $mark_v, 'noindex,nofollow' ); ?> /> noindex,nofollow</label>
+    </p>
 
-// Add meta box
-function mytheme_add_box() {
-    global $meta_box;
+<!--    <p><select name="extra[select]" />-->
+<!--        --><?php //$sel_v = get_post_meta($post->ID, 'select', 1); ?>
+<!--        <option value="0">----</option>-->
+<!--        <option value="1" --><?php //selected( $sel_v, '1' )?><!-- >Выбери меня</option>-->
+<!--        <option value="2" --><?php //selected( $sel_v, '2' )?><!-- >Нет, меня</option>-->
+<!--        <option value="3" --><?php //selected( $sel_v, '3' )?><!-- >Лучше меня</option>-->
+<!--        </select> ? выбор за вами</p>-->
 
-    add_meta_box($meta_box['id'], $meta_box['title'], 'mytheme_show_box', $meta_box['page'], $meta_box['context'], $meta_box['priority']);
+    <input type="hidden" name="extra_fields_nonce" value="<?php echo wp_create_nonce(__FILE__); ?>" />
+    <?php
 }
 
-// Callback function to show fields in meta box
-function mytheme_show_box() {
-    global $meta_box, $post;
+// включаем обновление полей при сохранении
+add_action('save_post', 'my_extra_fields_update', 0);
 
-    // Use nonce for verification
-    echo '<input type="hidden" name="mytheme_meta_box_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
+/* Сохраняем данные, при сохранении поста */
+function my_extra_fields_update( $post_id ){
+    if ( !isset($_POST['extra_fields_nonce']) || !wp_verify_nonce($_POST['extra_fields_nonce'], __FILE__) ) return false; // проверка
+    if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE  ) return false; // если это автосохранение
+    if ( !current_user_can('edit_post', $post_id) ) return false; // если юзер не имеет право редактировать запись
 
-    echo '<table class="form-table">';
+    if( !isset($_POST['extra']) ) return false;
 
-    foreach ($meta_box['fields'] as $field) {
-        // get current post meta data
-        $meta = get_post_meta($post->ID, $field['id'], true);
-
-        echo '<tr>',
-        '<th style="width:20%"><label for="', $field['id'], '">', $field['name'], '</label></th>',
-        '<td>';
-        switch ($field['type']) {
-            case 'text':
-                echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30" style="width:97%" />', '<br />', $field['desc'];
-                break;
-            case 'textarea':
-                echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4" style="width:97%">', $meta ? $meta : $field['std'], '</textarea>', '<br />', $field['desc'];
-                break;
-            case 'select':
-                echo '<select name="', $field['id'], '" id="', $field['id'], '">';
-                foreach ($field['options'] as $option) {
-                    echo '<option ', $meta == $option ? ' selected="selected"' : '', '>', $option, '</option>';
-                }
-                echo '</select>';
-                break;
-            case 'radio':
-                foreach ($field['options'] as $option) {
-                    echo '<input type="radio" name="', $field['id'], '" value="', $option['value'], '"', $meta == $option['value'] ? ' checked="checked"' : '', ' />', $option['name'];
-                }
-                break;
-            case 'checkbox':
-                echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
-                break;
+    // Все ОК! Теперь, нужно сохранить/удалить данные
+    $_POST['extra'] = array_map('trim', $_POST['extra']);
+    foreach( $_POST['extra'] as $key=>$value ){
+        if( empty($value) ){
+            delete_post_meta($post_id, $key); // удаляем поле если значение пустое
+            continue;
         }
-        echo     '</td><td>',
-        '</td></tr>';
-    }
 
-    echo '</table>';
+        update_post_meta($post_id, $key, $value); // add_post_meta() работает автоматически
+    }
+    return $post_id;
 }
 
-add_action('save_post', 'mytheme_save_data');
 
-// Save data from meta box
-function mytheme_save_data($post_id) {
-    global $meta_box;
 
-    // verify nonce
-    if (!wp_verify_nonce($_POST['mytheme_meta_box_nonce'], basename(__FILE__))) {
-        return $post_id;
-    }
-
-    // check autosave
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-        return $post_id;
-    }
-
-    // check permissions
-    if ('page' == $_POST['post_type']) {
-        if (!current_user_can('edit_page', $post_id)) {
-            return $post_id;
-        }
-    } elseif (!current_user_can('edit_post', $post_id)) {
-        return $post_id;
-    }
-
-    foreach ($meta_box['fields'] as $field) {
-        $old = get_post_meta($post_id, $field['id'], true);
-        $new = $_POST[$field['id']];
-
-        if ($new && $new != $old) {
-            update_post_meta($post_id, $field['id'], $new);
-        } elseif ('' == $new && $old) {
-            delete_post_meta($post_id, $field['id'], $old);
-        }
-    }
-}
 
 
 //-----------------------------------------end-META-BOX-----------------------------------------------------------------------
-?>
+
+//function progressBar_short($attr, $content) {
+//    return $content;
+//}
+//add_shortcode('progressBar', 'progressBar_short');
+//?>
 
 
