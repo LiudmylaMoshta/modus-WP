@@ -94,7 +94,6 @@
 <section class="section-progress-bar">
     <div class="container">
         <div class="row">
-
             <div class="col-md-3">
                 <?php $meta_value = get_post_meta($post->ID, 'title-progress-bar', true);
                 if(!empty($meta_value)) {
@@ -110,153 +109,9 @@
                 if(!empty($meta_value)) {
                     echo '<p class="text-progress-bar">' . $meta_value . '</p>';
                 } ?>
-                <div class="content-progressbar">
-                    <div class="col-xs-6 col-sm-3">
-                        <div id="suspendisse"></div>
-                        <script>
-                            var bar = new ProgressBar.SemiCircle(suspendisse, {
-                                strokeWidth: 6,
-                                color: '#889494',
-                                trailColor: '#76c7c0',
-                                trailWidth: 6,
-                                easing: 'easeInOut',
-                                duration: 1400,
-                                svgStyle: null,
-                                text: {
-                                    value: '',
-                                    alignToBottom: false
-                                },
-                                from: {color: '#e2534b'},
-                                to: {color: '#e2534b'},
-                                step: function(state, bar) {
-                                    bar.path.setAttribute('stroke', state.color);
-                                    var value = Math.round(bar.value() * 100);
-                                    if (value === 0) {
-                                        bar.setText('');
-                                    } else {
-                                        bar.setText(value);
-                                    }
-                                    bar.text.style.color = state.color;
-                                }
-                            });
+                <div class="progresbar-item">
 
-                            bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-                            bar.text.style.fontSize = '2rem';
-
-                            bar.animate(0.5);
-                        </script>
-                        SUSPENDISSE
-                    </div>
-                    <div class="col-xs-6 col-sm-3">
-                        <div id="maecenas"></div>
-                        <script>
-                            var bar = new ProgressBar.SemiCircle(maecenas, {
-                                strokeWidth: 6,
-                                color: '#889494',
-                                trailColor: '#76c7c0',
-                                trailWidth: 6,
-                                easing: 'easeInOut',
-                                duration: 1400,
-                                svgStyle: null,
-                                text: {
-                                    value: '',
-                                    alignToBottom: false
-                                },
-                                from: {color: '#e2534b'},
-                                to: {color: '#e2534b'},
-                                step: function(state, bar) {
-                                    bar.path.setAttribute('stroke', state.color);
-                                    var value = Math.round(bar.value() * 100);
-                                    if (value === 0) {
-                                        bar.setText('');
-                                    } else {
-                                        bar.setText(value);
-                                    }
-                                    bar.text.style.color = state.color;
-                                }
-                            });
-
-                            bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-                            bar.text.style.fontSize = '2rem';
-
-                            bar.animate(0.7);
-                        </script>
-                        MAECENAS
-                    </div>
-                    <div class="col-xs-6 col-sm-3">
-                        <div id="aliquam"></div>
-                        <script>
-                            var bar = new ProgressBar.SemiCircle(aliquam, {
-                                strokeWidth: 6,
-                                color: '#889494',
-                                trailColor: '#76c7c0',
-                                trailWidth: 6,
-                                easing: 'easeInOut',
-                                duration: 1400,
-                                svgStyle: null,
-                                text: {
-                                    value: '',
-                                    alignToBottom: false
-                                },
-                                from: {color: '#e2534b'},
-                                to: {color: '#e2534b'},
-                                step: function(state, bar) {
-                                    bar.path.setAttribute('stroke', state.color);
-                                    var value = Math.round(bar.value() * 100);
-                                    if (value === 0) {
-                                        bar.setText('');
-                                    } else {
-                                        bar.setText(value);
-                                    }
-                                    bar.text.style.color = state.color;
-                                }
-                            });
-
-                            bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-                            bar.text.style.fontSize = '2rem';
-
-                            bar.animate(0.8);
-                        </script>
-                        ALIQUAM
-                    </div>
-                    <div class="col-xs-6 col-sm-3">
-                        <div id="habitasse"></div>
-                        <script>
-                            var bar = new ProgressBar.SemiCircle(habitasse, {
-                                strokeWidth: 6,
-                                color: '#889494',
-                                trailColor: '#76c7c0',
-                                trailWidth: 6,
-                                easing: 'easeInOut',
-                                duration: 1400,
-                                svgStyle: null,
-                                text: {
-                                    value: '',
-                                    alignToBottom: false
-                                },
-                                from: {color: '#e2534b'},
-                                to: {color: '#e2534b'},
-                                step: function(state, bar) {
-                                    bar.path.setAttribute('stroke', state.color);
-                                    var value = Math.round(bar.value() * 100);
-                                    if (value === 0) {
-                                        bar.setText('');
-                                    } else {
-                                        bar.setText(value);
-                                    }
-                                    bar.text.style.color = state.color;
-                                }
-                            });
-
-                            bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-                            bar.text.style.fontSize = '2rem';
-
-                            bar.animate(1);
-                        </script>
-                        HABITASSE
-                    </div>
                 </div>
-
             </div>
             <div class="col-md-3">
                 <?php $meta_value = get_post_meta($post->ID, 'title-testimonials', true);
@@ -271,9 +126,6 @@
                 if(!empty($meta_value)) {
                     echo '<span class="name-author">' . $meta_value . '</span>';
                 } ?>
-
-
-
             </div>
         </div>
     </div>

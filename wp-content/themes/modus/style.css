@@ -232,8 +232,6 @@ html {
 .section-progress-bar {
   padding-top: 14px;
   background-color: #f3f3f3; }
-  .section-progress-bar .content-progressbar {
-    min-height: 180px; }
   .section-progress-bar .name-author {
     color: #777777;
     font: 600 1rem/1.875rem "Open Sans";
@@ -262,8 +260,8 @@ html {
       border-right-color: #FFFFFF;
       border-top-color: #FFFFFF;
       position: absolute;
-      bottom: 6%;
-      left: 25%; }
+      bottom: 13%;
+      left: 7%; }
 
 .section-img {
   padding-top: 50px;
