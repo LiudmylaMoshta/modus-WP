@@ -8,10 +8,9 @@
                 <div class="brand-modus" >
                     <a href="<?php echo home_url();?>"><?php echo get_theme_mod('logo'); ?></a>
                 </div>
-
-                <?php if (is_active_sidebar('widget-footer')) : ?>
-                    <?php dynamic_sidebar('widget-footer'); ?>
-                <?php endif; ?>
+                <ul id="widget-footer">
+                    <?php dynamic_sidebar( 'widget-footer' ); ?>
+                </ul>
                 <div>
                     <span>Phone:</span>
                     <a href="tel:<?php echo get_theme_mod('contact_tel'); ?>" class="phone"><?php echo get_theme_mod('contact_tel'); ?></a>
@@ -21,30 +20,28 @@
                     <?php echo get_theme_mod('contact_mail'); ?>
                 </a>
             </div>
-
-            <?php if (is_active_sidebar('widget-menu-footer1')) : ?>
-                <?php dynamic_sidebar('widget-menu-footer1'); ?>
-            <?php endif; ?>
-
-            <?php if (is_active_sidebar('widget-menu-footer2')) : ?>
-                <?php dynamic_sidebar('widget-menu-footer2'); ?>
-            <?php endif; ?>
-
+            <ul id="widget-menu-footer1">
+                <?php dynamic_sidebar( 'widget-menu-footer1' ); ?>
+            </ul>
+            <ul id="widget-menu-footer2">
+                <?php dynamic_sidebar( 'widget-menu-footer2' ); ?>
+            </ul>
             <article class="post-footer col-sm-4 col-md-4">
                 <h3 class="title-footer-post">from the <span class="big-title-footer">BLOG</span></h3>
                 <?php $wp_query = new WP_Query();
-                $wp_query->query('showposts=2' . '&paged=' . $paged);
+                $wp_query->query('showposts=2'/* . '&paged=' . $paged*/);
                 while ($wp_query->have_posts()) :
                 $wp_query->the_post(); ?>
                 <?php the_post_thumbnail(); ?>
                 <div class="content-post">
-                    <h2><a href="<?php the_permalink(); ?>" title="Read more">
+                    <h2>
+                        <a href="<?php the_permalink(); ?>" title="Read more">
                             <?php the_title(); ?>
                         </a>
                     </h2>
                     <span class="date-post">
                     <?php the_date('j F, Y'); ?>
-                </span>
+                    </span>
                 </div>
                 <?php endwhile; ?>
             </article>
@@ -57,7 +54,6 @@
                     <?php echo get_theme_mod('year _footer'); ?>
                     <?php echo get_bloginfo( 'title' ) ?>
                 </div>
-
                 <?php
                 $social_sites = ct_tribes_social_array();
                 foreach ( $social_sites as $social_site => $profile ) {

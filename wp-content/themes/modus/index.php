@@ -12,28 +12,17 @@
         </ol>
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
-
                   <?php
-
                 $query = new WP_Query(array('post_type' => 'slider', 'posts_per_page' => 100));
                 if ($query->have_posts()):?>
-
                 <?php while ($query->have_posts()) : $query->the_post(); ?>
-                <?php $meta_value = get_post_meta($post->ID, 'img', true);
-                if ( ! empty($meta_value)) {
-                    echo '<p>' . $meta_value . '</p>';
-                } ?>
             <div class="item <?php if (array_search($post, $query->get_posts()) === 0) {echo "active";}?>">
                     <?php the_post_thumbnail(); ?>
                 <div class="carousel-caption content-slider">
                     <?php the_title('<h3 class="title-slider-top">', '</h3>'); ?>
-
                     <?php the_content(); ?>
-
                 </div>
             </div>
-                <?php $meta_value = get_post_meta($post->ID, 'button', true);
-                if ( ! empty($meta_value)) { echo '<p>' . $meta_value . '</p>'; } ?>
                 <?php endwhile; ?>
                 <?php endif; wp_reset_postdata(); ?>
 
@@ -52,9 +41,9 @@
 <section class="section-services">
     <div class="container">
         <div class="prev-services">
-            <?php if (is_active_sidebar('widget-post')) : ?>
-                <?php dynamic_sidebar('widget-post'); ?>
-            <?php endif; ?>
+            <ul id="widget-post">
+                <?php dynamic_sidebar( 'widget-post' ); ?>
+            </ul>
         </div>
         <ul class="row list-services">
             <?php
@@ -72,7 +61,7 @@
 
                             <?php $meta_value = get_post_meta($post->ID, 'button', true);
                             if(!empty($meta_value)) {
-                                echo '<p>' . $meta_value . '</p>';
+                                echo '<div class="prev-button"><a href="#" class="link-button">' . $meta_value . '</a></div>';
                             } ?>
 
                         </div>
@@ -84,9 +73,9 @@
 </section>
 
 <section class="section-img">
-    <?php if (is_active_sidebar('title-section-gallery')) : ?>
-        <?php dynamic_sidebar('title-section-gallery'); ?>
-    <?php endif; ?>
+    <ul id="title-section-gallery">
+        <?php dynamic_sidebar( 'title-section-gallery' ); ?>
+    </ul>
     <div class="container">
         <ul class="row list-img">
             <?php

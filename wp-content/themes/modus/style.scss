@@ -69,6 +69,15 @@ font-size: 14px;
         }
     }
 }
+.navbar-default{
+    .nav-modus{
+        .li-menu{
+            a {
+                color: #ffffff;
+            }
+        }
+    }
+}
 .nav-modus{
     .li-menu{
         list-style-type: none;
@@ -104,9 +113,9 @@ font-size: 14px;
                 a{
                     display: block;
                     padding: 10px 17px;
+                    color: #ffffff;
                     &:before{
                         content: '\203a';
-                        color: #ffffff;
                         margin-right: 5px;
                     }
                 }
@@ -138,7 +147,7 @@ font-size: 14px;
 .prev-button{
     align-items: flex-start;
     text-align: center;
-    margin-bottom: -20px;
+    margin-bottom: -10px;
     a{
         background-color: #76c7c0;
         padding: 0.625rem 2.812rem;
